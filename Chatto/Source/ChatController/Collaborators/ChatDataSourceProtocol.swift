@@ -30,6 +30,7 @@ public enum UpdateType {
     case pagination
     case reload
     case messageCountReduction
+    case none
 }
 
 public protocol ChatDataSourceDelegateProtocol: class {

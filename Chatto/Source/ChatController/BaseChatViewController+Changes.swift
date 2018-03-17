@@ -232,6 +232,9 @@ extension BaseChatViewController: ChatDataSourceDelegateProtocol {
         let performInBackground = updateType != .firstLoad
 
         self.autoLoadingEnabled = false
+        if updateType == .none {
+          UIView.setAnimationsEnabled(false)
+        }
         let perfomBatchUpdates: (_ changes: CollectionChanges, _ updateModelClosure: @escaping () -> Void) -> Void  = { [weak self] (changes, updateModelClosure) in
             self?.performBatchUpdates(
                 updateModelClosure: updateModelClosure,
@@ -239,6 +242,9 @@ extension BaseChatViewController: ChatDataSourceDelegateProtocol {
                 updateType: updateType,
                 completion: { () -> Void in
                     self?.autoLoadingEnabled = true
+                    if updateType == .none {
+                      UIView.setAnimationsEnabled(true)
+                    }
                     completion()
             })
         }
